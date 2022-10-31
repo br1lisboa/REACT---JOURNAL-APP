@@ -1,0 +1,1 @@
+Aca crearemos paginas, layouts, hooks, componentes, todo relacionado al journal.

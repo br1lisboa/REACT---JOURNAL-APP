@@ -1,0 +1,1 @@
+Modulo donde tedremos diferentes paginas, componentes, hooks, relacionados a la autenticacion, loggin, registros
