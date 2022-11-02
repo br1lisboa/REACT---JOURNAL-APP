@@ -1,10 +1,9 @@
 import { Link as RouterLink } from "react-router-dom";
 
-import { Google } from "@mui/icons-material"
 import { Button, Grid, Link, TextField, Typography } from "@mui/material"
 import { AuthLayout } from "../layout/AuthLayout";
 
-export const RegisterPage = () => {
+const RegisterPage = () => {
     return (
         /* Grid se puede ver como un div pero con props interesantes, la mayor parte de los componentes de material vienen con un xs, y tenemos una popiedad sx que es style extended y tenemos acceso al tema que definimos con nuestro teamProvider*/
         <AuthLayout title="Crear cuenta">
@@ -63,3 +62,5 @@ export const RegisterPage = () => {
         </AuthLayout>
     )
 }
+
+export default RegisterPage
