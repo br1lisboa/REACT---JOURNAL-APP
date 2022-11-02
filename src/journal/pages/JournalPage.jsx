@@ -9,6 +9,11 @@ export const JournalPage = () => {
 
             <Typography>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate recusandae soluta commodi officia in vitae magni blanditiis quia iusto necessitatibus doloremque nemo, neque aut autem animi praesentium delectus quos harum?</Typography>
 
+            {/* Nada seleccionado */}
+
+
+            {/* Vista de la nota */}
+
         </JournalLayout>
     )
 }
