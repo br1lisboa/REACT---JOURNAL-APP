@@ -1,5 +1,5 @@
 import { signInWhitGoogle } from "../../firebase/providers"
-import { checkingCredentials } from "./authSlice"
+import { checkingCredentials, login, logout } from "./authSlice"
 
 /* thunk login */
 export const checkingAuhtentication = (mail, password) => {
@@ -17,7 +17,10 @@ export const startGoogleSignIn = () => {
         dispatch(checkingCredentials())
 
         const result = await signInWhitGoogle()
-        console.log({ result })
+        if (!result.ok) return dispatch(logout(result.errorMessage))
+        /* console.log({ result }) */
+
+        dispatch(login(result))
     }
 }
 
