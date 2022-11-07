@@ -12,6 +12,8 @@ const formData = ({
     displayName: 'Jhon Doe'
 })
 
+/* ES UN SIEMPLE OBJETO CON LOS MISMOS VALORES QUE LOS DE NUESTRO REGISTRO, CADA ARREGLO TIENE EN SU PRIMER
+POSICION LA FUNCION A EVALUAR Y EN SU SEGUNDA POSICION EL DE ERROR SI NO SE CUMPLE LA CONDICION */
 const formValidations = {
     mail: [(value) => value.includes('@'), 'El correo debe tener un @'],
     password: [(value) => value.length >= 6, 'El password debe contener mas de 6 letras'],
@@ -21,7 +23,10 @@ const formValidations = {
 const RegisterPage = () => {
 
     /* CUSTOM HOOK USEFORM PARA TOMAR LOS DATOS DEL FORMULARIO */
-    const { displayName, mail, password, onInputChange, formState } = useForm(formData, formValidations)
+    const { displayName, mail, password, onInputChange, formState,
+        isFormValid, displayNameValid, emailValid, passwordValid } = useForm(formData, formValidations)
+
+    console.log(displayNameValid)
 
     const onSubmit = (event) => {
         event.preventDefault()
@@ -53,7 +58,7 @@ const RegisterPage = () => {
                     <Grid item xs={12} sx={{ mt: 2 }}>
                         <TextField
                             label="Correo"
-                            type="email"
+                            type="mail"
                             placeholder="correo@google.com"
                             fullWidth
                             name="mail"
