@@ -8,7 +8,7 @@ import { useForm } from "../../hooks";
 /* DATOS ESTATICOS DEL FORMULARIO */
 const formData = ({
     mail: 'jhonDoe@jhon.com',
-    password: '12345',
+    password: '123456',
     displayName: 'Jhon Doe'
 })
 
