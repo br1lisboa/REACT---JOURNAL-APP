@@ -22,6 +22,8 @@ export const LoginPage = () => {
     const { status } = useSelector(state => state.auth)
     const isAuthenticated = useMemo(() => status === 'checking', [status])
 
+    
+
     /* auth mail / password */
     const onSubmit = (event) => {
         event.preventDefault()
