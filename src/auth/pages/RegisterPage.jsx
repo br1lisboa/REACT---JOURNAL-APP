@@ -12,10 +12,16 @@ const formData = ({
     displayName: 'Jhon Doe'
 })
 
+const formValidations = {
+    mail: [(value) => value.includes('@'), 'El correo debe tener un @'],
+    password: [(value) => value.length >= 6, 'El password debe contener mas de 6 letras'],
+    displayName: [(value) => value.length >= 1, 'El nombre es obligatorio']
+}
+
 const RegisterPage = () => {
 
     /* CUSTOM HOOK USEFORM PARA TOMAR LOS DATOS DEL FORMULARIO */
-    const { displayName, mail, password, onInputChange, formState } = useForm(formData)
+    const { displayName, mail, password, onInputChange, formState } = useForm(formData, formValidations)
 
     const onSubmit = (event) => {
         event.preventDefault()
@@ -39,7 +45,9 @@ const RegisterPage = () => {
                             fullWidth
                             name="displayName"
                             value={displayName}
-                            onChange={onInputChange} />
+                            onChange={onInputChange}
+                            error={false}
+                            helperText='El nombre es obligatorio' />
                     </Grid>
                     {/* Input correo */}
                     <Grid item xs={12} sx={{ mt: 2 }}>
