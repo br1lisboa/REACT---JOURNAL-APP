@@ -3,13 +3,14 @@ import { Link as RouterLink } from "react-router-dom";
 import { Button, Grid, Link, TextField, Typography } from "@mui/material"
 import { AuthLayout } from "../layout/AuthLayout";
 import { useForm } from "../../hooks";
+import { useState } from "react";
 
 
 /* DATOS ESTATICOS DEL FORMULARIO */
 const formData = ({
-    mail: 'jhonDoe@jhon.com',
-    password: '123456',
-    displayName: 'Jhon Doe'
+    mail: '',
+    password: '',
+    displayName: ''
 })
 
 /* ES UN SIEMPLE OBJETO CON LOS MISMOS VALORES QUE LOS DE NUESTRO REGISTRO, CADA ARREGLO TIENE EN SU PRIMER
@@ -22,14 +23,15 @@ const formValidations = {
 
 const RegisterPage = () => {
 
+    const [formSubmited, setFormSubmited] = useState(false)
+
     /* CUSTOM HOOK USEFORM PARA TOMAR LOS DATOS DEL FORMULARIO */
     const { displayName, mail, password, onInputChange, formState,
         isFormValid, displayNameValid, emailValid, passwordValid } = useForm(formData, formValidations)
 
-    console.log(displayNameValid)
-
     const onSubmit = (event) => {
         event.preventDefault()
+        setFormSubmited(true)
         console.log(formState)
     }
 
@@ -51,8 +53,8 @@ const RegisterPage = () => {
                             name="displayName"
                             value={displayName}
                             onChange={onInputChange}
-                            error={false}
-                            helperText='El nombre es obligatorio' />
+                            error={!!displayNameValid && formSubmited}
+                            helperText={displayNameValid} />
                     </Grid>
                     {/* Input correo */}
                     <Grid item xs={12} sx={{ mt: 2 }}>
@@ -63,7 +65,9 @@ const RegisterPage = () => {
                             fullWidth
                             name="mail"
                             value={mail}
-                            onChange={onInputChange} />
+                            onChange={onInputChange}
+                            error={!!emailValid && formSubmited}
+                            helperText={emailValid} />
                     </Grid>
                     {/* Input contraseña */}
                     <Grid item xs={12} sx={{ mt: 2 }}>
@@ -74,7 +78,9 @@ const RegisterPage = () => {
                             fullWidth
                             name="password"
                             value={password}
-                            onChange={onInputChange} />
+                            onChange={onInputChange}
+                            error={!!passwordValid && formSubmited}
+                            helperText={passwordValid} />
                     </Grid>
 
                     {/* Contenedor botones */}
