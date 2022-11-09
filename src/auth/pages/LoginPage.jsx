@@ -4,7 +4,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
 
 import { Google } from "@mui/icons-material"
-import { Button, Grid, Link, TextField, Typography } from "@mui/material"
+import { Alert, Button, Grid, Link, TextField, Typography } from "@mui/material"
 import { AuthLayout } from "../layout/AuthLayout";
 import { useForm } from "../../hooks";
 import { checkingAuhtentication, startGoogleSignIn, startLoginSignInWhitCredentials } from "../../store/auth/thunks"
@@ -28,7 +28,7 @@ export const LoginPage = () => {
 
     const dispatch = useDispatch()
 
-    const { status } = useSelector(state => state.auth)
+    const { status, errorMessage } = useSelector(state => state.auth)
     const isAuthenticated = useMemo(() => status === 'checking', [status])
 
     const [formSubmited, setFormSubmited] = useState(false)
@@ -92,6 +92,18 @@ export const LoginPage = () => {
 
                     {/* Contenedor botones */}
                     <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
+
+                        <Grid item xs={12}
+                            display={errorMessage ? '' : 'none'}>
+
+                            <Alert severity="error">
+
+                                {errorMessage}
+
+                            </Alert>
+                        </Grid>
+
+
                         {/* Boton login */}
                         <Grid item xs={12} sm={6}>
                             <Button
