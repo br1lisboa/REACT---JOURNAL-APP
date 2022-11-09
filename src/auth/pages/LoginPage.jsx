@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 import { Link as RouterLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
@@ -7,29 +7,44 @@ import { Google } from "@mui/icons-material"
 import { Button, Grid, Link, TextField, Typography } from "@mui/material"
 import { AuthLayout } from "../layout/AuthLayout";
 import { useForm } from "../../hooks";
-import { checkingAuhtentication, startGoogleSignIn } from "../../store/auth/thunks"
+import { checkingAuhtentication, startGoogleSignIn, startLoginSignInWhitCredentials } from "../../store/auth/thunks"
 import { useMemo } from "react";
+
+const formValidations = {
+    email: [(value) => value.includes('@'), 'El correo debe tener un @'],
+    password: [(value) => value.length >= 6, 'El password debe contener mas de 6 letras']
+}
+
+const formData = {
+    email: "",
+    password: ""
+}
 
 export const LoginPage = () => {
 
-    const { mail, password, onInputChange } = useForm({
-        mail: "test1@test1.com",
-        password: "123456"
-    })
+
+    const { email, password, onInputChange, formState, emailValid, passwordValid } = useForm(formData, formValidations)
+
 
     const dispatch = useDispatch()
 
     const { status } = useSelector(state => state.auth)
     const isAuthenticated = useMemo(() => status === 'checking', [status])
 
-    
+    const [formSubmited, setFormSubmited] = useState(false)
+
+
 
     /* auth mail / password */
     const onSubmit = (event) => {
         event.preventDefault()
 
-        console.log({ mail, password })
-        dispatch(checkingAuhtentication())
+        setFormSubmited(true)
+
+        console.log({ email, password })
+
+        //! NO ES LA ACCION CORRECTA
+        dispatch(startLoginSignInWhitCredentials(formState))
     }
 
     /* auth google signin */
@@ -55,9 +70,11 @@ export const LoginPage = () => {
                             type="email"
                             placeholder="correo@google.com"
                             fullWidth
-                            name="mail"
-                            value={mail}
-                            onChange={onInputChange} />
+                            name="email"
+                            value={email}
+                            onChange={onInputChange}
+                            error={!!emailValid && formSubmited}
+                            helperText={emailValid} />
                     </Grid>
                     {/* Input contraseña */}
                     <Grid item xs={12} sx={{ mt: 2 }}>
@@ -68,7 +85,9 @@ export const LoginPage = () => {
                             fullWidth
                             name="password"
                             value={password}
-                            onChange={onInputChange} />
+                            onChange={onInputChange}
+                            error={!!passwordValid && formSubmited}
+                            helperText={passwordValid} />
                     </Grid>
 
                     {/* Contenedor botones */}

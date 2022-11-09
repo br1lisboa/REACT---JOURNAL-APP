@@ -1,11 +1,12 @@
 import { Link as RouterLink } from "react-router-dom";
 
-import { Button, Grid, Link, TextField, Typography } from "@mui/material"
+import { Alert, Button, Grid, Link, TextField, Typography } from "@mui/material"
 import { AuthLayout } from "../layout/AuthLayout";
 import { useForm } from "../../hooks";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { startCreatingUserWhitEmailPassword } from "../../store/auth/thunks";
+import { useMemo } from "react";
 
 
 /* DATOS ESTATICOS DEL FORMULARIO */
@@ -26,20 +27,24 @@ const formValidations = {
 const RegisterPage = () => {
 
     const dispatch = useDispatch()
-    
+
 
     const [formSubmited, setFormSubmited] = useState(false)
 
-    
-    
+
+    const { status, errorMessage } = useSelector(state => state.auth)
+    const isCheckingAtuhentication = useMemo(() => status === 'checking', [status])
+
+
+
     /* CUSTOM HOOK USEFORM PARA TOMAR LOS DATOS DEL FORMULARIO */
     const { displayName, email, password, onInputChange, formState,
         isFormValid, displayNameValid, emailValid, passwordValid } = useForm(formData, formValidations)
 
-    
-    
-    
-        const onSubmit = (event) => {
+
+
+
+    const onSubmit = (event) => {
         event.preventDefault()
         setFormSubmited(true)
 
@@ -98,9 +103,21 @@ const RegisterPage = () => {
 
                     {/* Contenedor botones */}
                     <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
+
+                        <Grid item xs={12}
+                            display={!!errorMessage ? ' ' : 'none'}
+                        >
+
+                            <Alert severity="error">{errorMessage}</Alert>
+
+                        </Grid>
+
+
+
                         {/* Boton login */}
                         <Grid item xs={12} >
                             <Button
+                                disabled={isCheckingAtuhentication}
                                 type="submit"
                                 variant="contained"
                                 fullWidth
@@ -123,7 +140,7 @@ const RegisterPage = () => {
                 </Grid>
             </form>
 
-        </AuthLayout>
+        </AuthLayout >
     )
 }
 
