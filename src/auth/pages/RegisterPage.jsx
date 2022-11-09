@@ -4,11 +4,13 @@ import { Button, Grid, Link, TextField, Typography } from "@mui/material"
 import { AuthLayout } from "../layout/AuthLayout";
 import { useForm } from "../../hooks";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { startCreatingUserWhitEmailPassword } from "../../store/auth/thunks";
 
 
 /* DATOS ESTATICOS DEL FORMULARIO */
 const formData = ({
-    mail: '',
+    email: '',
     password: '',
     displayName: ''
 })
@@ -16,23 +18,34 @@ const formData = ({
 /* ES UN SIEMPLE OBJETO CON LOS MISMOS VALORES QUE LOS DE NUESTRO REGISTRO, CADA ARREGLO TIENE EN SU PRIMER
 POSICION LA FUNCION A EVALUAR Y EN SU SEGUNDA POSICION EL DE ERROR SI NO SE CUMPLE LA CONDICION */
 const formValidations = {
-    mail: [(value) => value.includes('@'), 'El correo debe tener un @'],
+    email: [(value) => value.includes('@'), 'El correo debe tener un @'],
     password: [(value) => value.length >= 6, 'El password debe contener mas de 6 letras'],
     displayName: [(value) => value.length >= 1, 'El nombre es obligatorio']
 }
 
 const RegisterPage = () => {
 
+    const dispatch = useDispatch()
+    
+
     const [formSubmited, setFormSubmited] = useState(false)
 
+    
+    
     /* CUSTOM HOOK USEFORM PARA TOMAR LOS DATOS DEL FORMULARIO */
-    const { displayName, mail, password, onInputChange, formState,
+    const { displayName, email, password, onInputChange, formState,
         isFormValid, displayNameValid, emailValid, passwordValid } = useForm(formData, formValidations)
 
-    const onSubmit = (event) => {
+    
+    
+    
+        const onSubmit = (event) => {
         event.preventDefault()
         setFormSubmited(true)
-        console.log(formState)
+
+        if (!isFormValid) return
+
+        dispatch(startCreatingUserWhitEmailPassword(formState))
     }
 
 
@@ -63,8 +76,8 @@ const RegisterPage = () => {
                             type="email"
                             placeholder="correo@google.com"
                             fullWidth
-                            name="mail"
-                            value={mail}
+                            name="email"
+                            value={email}
                             onChange={onInputChange}
                             error={!!emailValid && formSubmited}
                             helperText={emailValid} />

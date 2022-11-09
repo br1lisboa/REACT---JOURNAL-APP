@@ -1,4 +1,4 @@
-import { signInWhitGoogle } from "../../firebase/providers"
+import { registerUserWhitEmailPassword, signInWhitGoogle } from "../../firebase/providers"
 import { checkingCredentials, login, logout } from "./authSlice"
 
 /* thunk login */
@@ -24,3 +24,23 @@ export const startGoogleSignIn = () => {
     }
 }
 
+
+export const startCreatingUserWhitEmailPassword = ({ email, password, displayName }) => {
+
+    return async (dispatch) => {
+
+        dispatch(checkingCredentials())
+
+        const { ok, uid, photoURL, errorMessage } = await registerUserWhitEmailPassword({ email, password, displayName })
+
+        if (!ok) return dispatch(logout({ errorMessage }))
+
+        dispatch(login({ uid, displayName, email, photoURL }))
+
+        //console.log(respThunk)
+
+
+    }
+
+
+}
