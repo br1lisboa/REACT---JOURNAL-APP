@@ -87,13 +87,13 @@ export const loginWhitEmailPassword = async ({ email, password }) => {
 
         const respProvider = await signInWithEmailAndPassword(firebaseAuth, email, password)
 
-        console.log(respProvider)
+        const { uid, photoURL, displayName } = respProvider.user
 
         return {
 
             ok: true,
-            respProvider
-            
+            uid, photoURL, email, displayName
+
         }
 
 

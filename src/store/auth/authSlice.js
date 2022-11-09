@@ -5,7 +5,7 @@ export const authSlice = createSlice({
     name: 'auth',
 
     initialState: {
-        status: 'not-auth', // checking - not-auth - auth > we gona create tree states
+        status: 'checking', // checking - not-auth - auth > we gona create tree states
         uid: null,
         email: null,
         displayName: null,
