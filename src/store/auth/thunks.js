@@ -53,11 +53,11 @@ export const startLoginSignInWhitCredentials = ({ email, password }) => {
 
         dispatch(checkingCredentials())
 
-        const { ok, uid, photoURL, errorMessage } = await loginWhitEmailPassword({ email, password })
+        const { ok, uid, photoURL, errorMessage, displayName } = await loginWhitEmailPassword({ email, password })
 
         if (!ok) return dispatch(logout({ errorMessage }))
 
-        dispatch(login({ uid, email, photoURL }))
+        dispatch(login({ uid, email, photoURL, displayName }))
 
 
 

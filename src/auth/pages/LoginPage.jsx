@@ -41,7 +41,7 @@ export const LoginPage = () => {
 
         setFormSubmited(true)
 
-        console.log({ email, password })
+        /* console.log({ email, password }) */
 
         //! NO ES LA ACCION CORRECTA
         dispatch(startLoginSignInWhitCredentials(formState))
@@ -49,7 +49,7 @@ export const LoginPage = () => {
 
     /* auth google signin */
     const onGoogleSignIn = () => {
-        console.log('onGoogle')
+        /* console.log('onGoogle') */
         dispatch(startGoogleSignIn())
     }
 
@@ -60,7 +60,7 @@ export const LoginPage = () => {
         /* Grid se puede ver como un div pero con props interesantes, la mayor parte de los componentes de material vienen con un xs, y tenemos una popiedad sx que es style extended y tenemos acceso al tema que definimos con nuestro teamProvider*/
         <AuthLayout title="Login">
 
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className='animate__animated animate__fadeIn'>
                 {/* Contenedor del form */}
                 <Grid container >
                     {/* Input correo */}

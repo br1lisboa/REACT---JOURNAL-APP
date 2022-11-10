@@ -58,7 +58,7 @@ const RegisterPage = () => {
         /* Grid se puede ver como un div pero con props interesantes, la mayor parte de los componentes de material vienen con un xs, y tenemos una popiedad sx que es style extended y tenemos acceso al tema que definimos con nuestro teamProvider*/
         <AuthLayout title="Crear cuenta">
 
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className='animate__animated animate__fadeIn'>
                 {/* Contenedor del form */}
                 <Grid container >
                     {/* Input datos */}
