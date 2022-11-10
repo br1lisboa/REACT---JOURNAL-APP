@@ -55,7 +55,7 @@ export const journalSlice = createSlice({
         },
         deleteNoteById: (state, action) => {
 
-        },
+        }
     },
 })
 
