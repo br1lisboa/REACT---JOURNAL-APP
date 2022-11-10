@@ -14,7 +14,6 @@ export const JournalPage = () => {
 
     const { isSaving, active } = useSelector(state => state.journal)
     const isActive = !!active
-    console.log(isActive)
 
 
     const onClickNewNote = () => {
@@ -31,8 +30,6 @@ export const JournalPage = () => {
             {
                 (active) ? <NoteView /> : <NothingSelectdView />
             }
-
-            {/* <Typography>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate recusandae soluta commodi officia in vitae magni blanditiis quia iusto necessitatibus doloremque nemo, neque aut autem animi praesentium delectus quos harum?</Typography> */}
 
             {/* Nada seleccionado */}
             {/* <NothingSelectdView /> */}
