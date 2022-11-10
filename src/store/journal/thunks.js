@@ -1,7 +1,7 @@
 import { collection, doc, setDoc } from "firebase/firestore/lite"
 import { firebaseBD } from "../../firebase/config"
 import { loadNotes } from "../../helpers/loadNotes"
-import { addNewEmptyNote, isSaving, setActiveNote, setNotes } from "./journalSlice"
+import { addNewEmptyNote, isSaving, setActiveNote, setNotes, setSaving } from "./journalSlice"
 
 
 export const startNewNote = () => {
@@ -58,6 +58,34 @@ export const startLoadingNotes = () => {
 
         dispatch(setNotes(loadNote))
 
+
+    }
+
+
+}
+
+
+
+export const startSaveNote = () => {
+
+    return async (dispatch, getState) => {
+
+        dispatch(setSaving())
+
+        /* CREAR EL URL NECESARIO PARA ACTUALIZAR LA NOTA */
+        const { uid } = getState().auth
+        /* BUSCAMOS LA NOTA ACTIVA */
+        const { active: note } = getState().journal
+
+        /* DESESTRUCTURAMOS LA NOTA Y LE QUITAMOS EL ID POR QUE EN EL UPDATE NO QUEREMOS QUE FIRESTORE NOS OTORGUE UN NUEVO ID */
+        const noteToFireStore = { ...note }
+        delete noteToFireStore.id
+
+        /* REFERENCIA AL DOCUMENTO */
+        const docRef = doc(firebaseBD, `${uid}/journal/notes/${note.id}`)
+
+        /* GUARDAR EN LA BD DE FIREBASE */
+        await setDoc(docRef, noteToFireStore, { merge: true })
 
     }
 
