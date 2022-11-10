@@ -6,7 +6,7 @@ export const journalSlice = createSlice({
 
     initialState: {
         /* BANDERA BOOLEANA PARA SABER SI ESTOY GUARDANDO LA NOTA O NO */
-        isSaving: true,
+        isSaving: false,
         /* MENSAJE QUE SE GUARDARA */
         messageSaved: '',
         /* LAS NOTAS VAN A SER ALMACENADAS EN UN OBJETO, LO INICIALIZO VACIO */
@@ -26,10 +26,20 @@ export const journalSlice = createSlice({
 
     reducers: {
         /* TODO LO QUE COLOQUEMOS EN LOS REDUCERS DEBE SER TRABAJO SINCRONO */
+        isSaving: (state) => {
+            state.isSaving = true
+        },
+
         addNewEmptyNote: (state, action) => {
+
+            state.notes.push(action.payload) /* EN EL PAYLOAD VAMOS A TENER NUESTRA NUEVA NOTA */
+            state.isSaving = false
+
 
         },
         setActiveNote: (state, action) => {
+
+            state.active = action.payload
 
         },
         setNotes: (state, action) => {
@@ -48,4 +58,4 @@ export const journalSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { addNewEmptyNote, setActiveNote, setNotes, setSaving, updateNote, deleteNoteById } = journalSlice.actions
+export const { addNewEmptyNote, setActiveNote, setNotes, setSaving, updateNote, deleteNoteById, isSaving } = journalSlice.actions
