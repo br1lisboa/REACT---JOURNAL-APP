@@ -1,4 +1,4 @@
-import { loginWhitEmailPassword, registerUserWhitEmailPassword, signInWhitGoogle } from "../../firebase/providers"
+import { loginWhitEmailPassword, logoutFirebase, registerUserWhitEmailPassword, signInWhitGoogle } from "../../firebase/providers"
 import { checkingCredentials, login, logout } from "./authSlice"
 
 /* thunk login */
@@ -11,6 +11,7 @@ export const checkingAuhtentication = (mail, password) => {
     }
 
 }
+
 
 export const startGoogleSignIn = () => {
     return async (dispatch) => {
@@ -45,8 +46,6 @@ export const startCreatingUserWhitEmailPassword = ({ email, password, displayNam
 }
 
 
-
-
 export const startLoginSignInWhitCredentials = ({ email, password }) => {
 
 
@@ -65,5 +64,18 @@ export const startLoginSignInWhitCredentials = ({ email, password }) => {
     }
 
 
+
+}
+
+
+export const startLogout = () => {
+
+    return async (dispatch) => {
+
+        await logoutFirebase()
+
+        dispatch(logout())
+
+    }
 
 }

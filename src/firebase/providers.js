@@ -4,9 +4,6 @@ import { firebaseAuth } from "./config";
 const googleProvider = new GoogleAuthProvider()
 
 
-
-
-
 export const signInWhitGoogle = async () => {
 
     try {
@@ -44,9 +41,6 @@ export const signInWhitGoogle = async () => {
     }
 
 }
-
-
-
 
 
 export const registerUserWhitEmailPassword = async ({ email, password, displayName }) => {
@@ -106,5 +100,13 @@ export const loginWhitEmailPassword = async ({ email, password }) => {
     }
 
 
+
+}
+
+
+export const logoutFirebase = async () => {
+
+    /* ESTA FUNCION CIERRA TODAS LAS SESIONES */
+    return await firebaseAuth.signOut()
 
 }

@@ -15,7 +15,7 @@ export const useCheckAuth = () => {
 
         /* FIREBASE NOS OFRECE UNA FORMA DE ESTAR PENDIENTE DE LOS CAMBIOS QUE ESE USUARIO VA A TENER */
         onAuthStateChanged(firebaseAuth, async (user) => {
-            if (!user) return dispatch(logout)
+            if (!user) return dispatch(logout())
 
 
             const { uid, email, displayName, photoURL } = user
