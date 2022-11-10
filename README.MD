@@ -4,27 +4,33 @@ Application in which we configure Redux, applied at the beginning in the authent
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Use the package manager [yarn](https://yarnpkg.com/).
 
 ```bash
-pip install foobar
+yarn install
 ```
 
-## Usage
-
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
+```bash
+yarn dev
 ```
 
+## Characteristic
+*Redux*
+
+*Firebase*
+
+*Fire Store*
+
+*Redux Devtools*
+
+*Thunk*
+
+*Forms*
+
+*Google SignIn*
+
+*Persistent state*
+<!-- 
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
@@ -32,4 +38,6 @@ to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
-## License
+## License -->
+
+### Thank you!
