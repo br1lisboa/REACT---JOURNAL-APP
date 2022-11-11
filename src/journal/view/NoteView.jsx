@@ -29,7 +29,6 @@ export const NoteView = () => {
 
     const fileInputRef = useRef()
 
-
     useEffect(() => {
 
         dispatch(setActiveNote(formState))
@@ -57,7 +56,6 @@ export const NoteView = () => {
 
         if (target.files === 0) return
 
-        console.log('subiendo archivos...')
         dispatch(startUploadingFiles(target.files))
 
     }
