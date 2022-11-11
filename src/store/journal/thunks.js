@@ -2,7 +2,7 @@ import { collection, doc, setDoc } from "firebase/firestore/lite"
 import { firebaseBD } from "../../firebase/config"
 import { fileUpload } from "../../helpers/fileUpload"
 import { loadNotes } from "../../helpers/loadNotes"
-import { addNewEmptyNote, isSaving, setActiveNote, setNotes, setSaving, updateNote } from "./journalSlice"
+import { addNewEmptyNote, isSaving, setActiveNote, setNotes, setPhotosToActiveNote, setSaving, updateNote } from "./journalSlice"
 
 
 export const startNewNote = () => {
@@ -100,7 +100,19 @@ export const startUploadingFiles = (files = []) => {
 
         dispatch(setSaving())
 
-        await fileUpload(files[0])
+        const photoUrl = await fileUpload(files[0])
+
+        /* const fileUploadPromises = []
+
+        for (const file of files) {
+            fileUploadPromises.push(fileUpload(file))
+        }
+
+        const photosUrls = await Promise.all(fileUploadPromises) */
+
+        /* console.log(photosUrls) */
+
+        dispatch(setPhotosToActiveNote(photoUrl))
 
     }
 

@@ -68,6 +68,10 @@ export const journalSlice = createSlice({
             //TODO: mostrar msj de actualizacion...
             state.messageSaved = `${action.payload.title}, actualizada correctamente`
         },
+        setPhotosToActiveNote: (state, action) => {
+            state.active.imageUrls = action.payload
+            state.isSaving = false
+        },
         deleteNoteById: (state, action) => {
 
         }
@@ -75,4 +79,4 @@ export const journalSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { addNewEmptyNote, setActiveNote, setNotes, setSaving, updateNote, deleteNoteById, isSaving } = journalSlice.actions
+export const { addNewEmptyNote, setActiveNote, setNotes, setSaving, updateNote, deleteNoteById, isSaving, setPhotosToActiveNote } = journalSlice.actions
