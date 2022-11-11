@@ -1,13 +1,18 @@
 import { TurnedInNot } from "@mui/icons-material"
 import { Box, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from "@mui/material"
-import { useSelector } from "react-redux"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { updateNote } from "../../store/journal/journalSlice"
 import { SideBarItem } from "./SideBarItem"
 
 export const SideBar = ({ drawerWidht = 240 }) => {
 
+    const dispatch = useDispatch()
+
     const { displayName } = useSelector(state => state.auth)
 
     const { notes } = useSelector(state => state.journal)
+
 
 
 

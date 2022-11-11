@@ -1,7 +1,7 @@
 import { collection, doc, setDoc } from "firebase/firestore/lite"
 import { firebaseBD } from "../../firebase/config"
 import { loadNotes } from "../../helpers/loadNotes"
-import { addNewEmptyNote, isSaving, setActiveNote, setNotes, setSaving } from "./journalSlice"
+import { addNewEmptyNote, isSaving, setActiveNote, setNotes, setSaving, updateNote } from "./journalSlice"
 
 
 export const startNewNote = () => {
@@ -65,7 +65,6 @@ export const startLoadingNotes = () => {
 }
 
 
-
 export const startSaveNote = () => {
 
     return async (dispatch, getState) => {
@@ -87,7 +86,8 @@ export const startSaveNote = () => {
         /* GUARDAR EN LA BD DE FIREBASE */
         await setDoc(docRef, noteToFireStore, { merge: true })
 
-    }
+        dispatch(updateNote(note))
 
+    }
 
 }

@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { useMemo } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useForm } from "../../hooks/useForm"
-import { setActiveNote } from "../../store/journal/journalSlice"
+import { setActiveNote, updateNote } from "../../store/journal/journalSlice"
 import { startSaveNote } from "../../store/journal/thunks"
 import { ImageGallery } from "../components"
 

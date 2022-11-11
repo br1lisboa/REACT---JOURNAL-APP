@@ -53,8 +53,17 @@ export const journalSlice = createSlice({
             //TODO: mensaje de error
         },
         updateNote: (state, action) => {
-            state.isSaving = false,
-            state.notes = state.notes.map(st => st.uid === uid)
+            state.isSaving = false
+            state.notes = state.notes.map(note => {
+
+                if (note.id === action.payload.id) {
+                    return action.payload
+                }
+
+                return note
+            })
+
+            //TODO: mostrar msj de actualizacion...
         },
         deleteNoteById: (state, action) => {
 
