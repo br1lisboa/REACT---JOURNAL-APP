@@ -30,6 +30,16 @@ yarn dev
 *Google SignIn*
 
 *Persistent state*
+
+*Crud Firestore*
+
+*More reducers*
+
+*Select and upload archives and images*
+
+*AnimateCSS*
+
+*Clean Logout*
 <!-- 
 ## Contributing
 
