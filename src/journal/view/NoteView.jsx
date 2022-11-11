@@ -3,12 +3,12 @@ import { useMemo } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useForm } from "../../hooks/useForm"
 import { setActiveNote } from "../../store/journal/journalSlice"
-import { startSaveNote, startUploadingFiles } from "../../store/journal/thunks"
+import { startDeletingNote, startSaveNote, startUploadingFiles } from "../../store/journal/thunks"
 import { ImageGallery } from "../components"
 import Swal from 'sweetalert2'
 import 'sweetalert2/dist/sweetalert2.css'
 import { Button, Grid, IconButton, TextField, Typography } from "@mui/material"
-import { SaveOutlined, UploadOutlined } from "@mui/icons-material"
+import { DeleteOutline, SaveOutlined, UploadOutlined } from "@mui/icons-material"
 
 
 
@@ -60,6 +60,11 @@ export const NoteView = () => {
 
     }
 
+    const onDelete = () => {
+
+        dispatch(startDeletingNote())
+    
+    }
 
     return (
         <Grid container direction='row' justifyContent='space-between' alignItems='center' sx={{ mb: 1 }} className='animate__animated animate__fadeIn'>
@@ -100,7 +105,6 @@ export const NoteView = () => {
             </Grid>
 
             <Grid container>
-
                 <TextField
                     type={"text"}
                     variant={"filled"}
@@ -125,13 +129,28 @@ export const NoteView = () => {
                     value={body}
                     onChange={onInputChange}
                 />
+            </Grid>
 
-                {/* Galeria de imagenes */}
-                <ImageGallery
-                    images={note.imageUrls}
-                />
+            <Grid container justifyContent={'end'} >
+
+                <Button
+                    onClick={onDelete}
+                    sx={{ mt: 2 }}
+                    color="error"
+                >
+
+                    <DeleteOutline />
+                    Borrar
+
+                </Button>
 
             </Grid>
+
+            {/* Galeria de imagenes */}
+            <ImageGallery
+                images={note.imageUrls}
+            />
+
 
         </Grid>
     )
